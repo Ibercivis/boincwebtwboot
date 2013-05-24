@@ -1,0 +1,6 @@
+
+AuthName "ibercivis"
+AuthType Basic
+AuthUserFile /home/ibercivis/projects/ibercivis//html/ops/.htpasswd
+require valid-user
+
