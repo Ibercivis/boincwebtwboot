@@ -26,6 +26,7 @@ db_init();
 
 $profile = get_current_uotd();
 if (!$profile) {
+    page_head(tra("User of the day"));
     echo tra("No user of the day has been chosen.");
 } else {
     $d = gmdate("d F Y", time());
