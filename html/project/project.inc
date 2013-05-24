@@ -252,7 +252,7 @@ function page_tail($show_date=false, $prefix="") {
 			<div class="navbar navbar-fixed-bottom ">
 	<div class="navbar-inner">
 	<ul class="nav pull-right">
-	<li><a href="mailto:info@ibercivis.es"><?php echo "&copy;" . date("Y")." ".PROJECT; ?></a></li>
+	<li><a href="mailto:info@what.es"><?php echo "&copy;" . date("Y")." ".PROJECT; ?></a></li>
 	</ul>
 	</div>
 	</div>
