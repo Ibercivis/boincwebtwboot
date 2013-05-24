@@ -1,0 +1,49 @@
+*** Bindsurf system configuration file ***
+./input         			#input files folder
+./output-2bxg					#output files folder
+
+*** INPUT ***
+2bxg_rec.mol2 				#receptor
+2bxg_lig.mol2         		#ligand
+sasa_params            		#SASA parameters file
+vdw_params             		#VDW parameters file
+hbond_params           		#HBOND parameters file
+1						#random seed
+1						#number of global best energy ligands
+
+	*** Bindsurf simulations parameters ***
+500		     			#simulation steps
+0.05                    		#maximum shift
+5                       		#maximum rotation angle (degrees)
+1                     		#mode: redocking(0) or surface screening (1:grid , 2:full)
+1						#number of best energy ligands
+10000					#energy value when the atom is outside the grid
+yes						#Use electrostatic term?
+yes						#Use VDW term?
+yes						#Use hydrogen bonds cosine term?
+yes						#Use hydrogen bonds sine term?
+
+	*** Positions generation parameters ***
+10000                		#Energy cutoff
+0.5                  		#Radius cutoff (nm)
+50						#number of intents of generate a good position
+15                       	#maximum rotation angle (degrees)
+
+	*** Dogrid parameters ***
+grid-2bxg.inp					#configuration file (template)
+
+	*** Ligand conformations generation parameters ***
+1                 			#Number of ligand conformations
+
+	*** Imod parameteres ***
+1                    		#Number of receptor conformations
+
+
+*** OUTPUT ***
+ca_file_2BXG          		#alfa carbons file
+positions-2bxg	     		#positions file	
+2bxg_potential.es  			#ES gridfile
+2bxg_neighbours.vdw 		#VDW gridfile
+pymol.pml					#Pymol file 
+histogram.png				#Histogram image
+
