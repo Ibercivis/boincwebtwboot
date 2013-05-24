@@ -85,7 +85,7 @@ row2(tra("Sort by"),
     '<select name="search_sort">'.$sortlist.'</select');
 
 row1("&nbsp;");
-row2("","<input type=\"submit\" value=\"".tra("Start the search")."\">");
+row2("","<input type=\"submit\" class=\"btn\" value=\"".tra("Start the search")."\">");
 echo "</form>";
 end_table();
 

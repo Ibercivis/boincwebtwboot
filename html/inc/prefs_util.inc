@@ -100,7 +100,7 @@ class PREF_BOOL extends PREF {
         } else {
             $checked = $prefs->$tag;
         }
-        echo "<td class=fieldvalue>"
+        echo "<td >"
             ."<input type=checkbox name=$this->tag "
             . ($checked?"checked":"")
             ."></td>
@@ -162,7 +162,7 @@ class NUM_SPEC {
             $v /= $this->scale;
             if ($v == 0) $v = "";
         }
-        return "<input size=5 name=$tag value='$v'> $this->suffix ";
+        return "<input type=\"text\" size=5 name=$tag value='$v'> $this->suffix ";
     }
     function form_convert($in, &$out, &$error) {
         $error = false;

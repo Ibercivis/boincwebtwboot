@@ -241,7 +241,7 @@ if (is_news_forum($forum) && $logged_in_user && ($logged_in_user->id == $thread-
         show_button(
             "forum_thread_status.php?action=clear&amp;id=$thread->id",
             tra("Export as Notice"),
-            "Show this message to all volunteers in the desktop GUI.  Use this only for messages of interest or importance to all volunteers."
+            tra("Export this news item as a Notice")
         );
     } else {
         show_button(
@@ -254,10 +254,9 @@ if (is_news_forum($forum) && $logged_in_user && ($logged_in_user->id == $thread-
 
 // Display a box that allows the user to select sorting of the posts
 echo "</td><td align=\"right\">
-    <input type=\"hidden\" name=\"id\" value=\"", $thread->id, "\">" .
-    tra("Sort");
+    <div class=\"input-append\"><input type=\"hidden\" name=\"id\" value=\"", $thread->id, "\">";
 echo select_from_array("sort", $thread_sort_styles, $sort_style);
-echo "<input type=\"submit\" value=\"".tra('Sort')."\">
+echo "<input class=\"btn\" type=\"submit\" value=\"".tra('Sort')."\"></div>
     </td></tr></table></form>
 ";
 

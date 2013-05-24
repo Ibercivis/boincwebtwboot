@@ -119,7 +119,7 @@ function show_login_info($prefix="") {
     ";
     if ($user) {
         $url_tokens = url_tokens($user->authenticator);
-        echo "<nobr>$user->name &middot; <a href=".$prefix."logout.php?$url_tokens>".tra("log out")."</a></nobr>";
+        echo "<nobr>$user->name | <a href=".$prefix."logout.php?$url_tokens>".tra("log out")."</a></nobr>";
     } else {
         echo "<a href=".$prefix."login_form.php>".tra("log in")."</a>";
     }
@@ -172,7 +172,7 @@ function page_head(
     } else {
         echo "<title>".sanitize_tags($title_plain)."</title>\n";
     }
-    echo "<link rel=stylesheet type=\"text/css\" href=\"".URL_BASE."main.css\" media=\"all\">
+    echo "<link rel=stylesheet type=\"text/css\" href=\"".URL_BASE."ibercivis_main.css\" media=\"all\">
         <link rel=stylesheet type=\"text/css\" href=\"$stylesheet\">
     ";
     if ($stylesheet2) {
@@ -284,7 +284,7 @@ function date_str($x) {
 
 function time_str($x) {
     if ($x == 0) return "---";
-    return gmdate('j M Y, G:i:s', $x) . " UTC";
+    return gmdate('j M Y | G:i:s', $x) . " UTC";
 }
 
 function local_time_str($x) {
@@ -297,7 +297,7 @@ function pretty_time_str($x) {
 }
 
 function start_table($extra="width=\"100%\"") {
-    echo "<table class=bordered $extra>";
+    echo "<table class=\"table\" $extra>";
 }
 
 function start_table_noborder($width="100%") {
@@ -730,9 +730,15 @@ function current_url() {
 // @param desc The title of the destination - typically used as a popup
 // @param class The optional CSS class of the button. Defaults to a standard button
 //
-function show_button($url, $text, $desc=null, $class="button") {
+function show_button($url, $text, $desc=null, $class="btn") {
     if (!$desc) $desc = $text;
-    echo "<a href=\"".$url."\" title=\"$desc\" class=\"".$class."\">".$text."</a>\n";
+		?>
+    <a href="<?php echo $url ?>" 
+		title="<? echo $desc ?>"
+		class="<?php echo $class?>">
+		<?php echo $text?> 
+		</a>
+		<?
 }
 function button_text($url, $text, $desc=null, $class="button") {
     if (!$desc) $desc = $text;

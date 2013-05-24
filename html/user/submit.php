@@ -391,7 +391,7 @@ function handle_query_job($user) {
 
     echo "
         <a href=workunit.php?wuid=$wuid>Workunit details</a> &middot;
-        <a href=submit.php?action=query_batch?batch_id=$wu->batch>Batch $wu->batch</a>
+        <a href=submit.php?action=query_batch&batch_id=$wu->batch>Batch $wu->batch</a>
     ";
 
     // show input files
@@ -413,7 +413,7 @@ function handle_query_job($user) {
         $s = stat($path);
         $size = $s['size'];
         table_row(
-            "<a href=/download/$dir/$pname>$lname</a>",
+            "<a href=download/$dir/$pname>$lname</a>",
             $size,
             $md5
         );
@@ -552,9 +552,9 @@ function handle_show_all($user) {
         //
         check_admin_access($user, $appid);
         if ($appid) {
-            $app = BoincApp::lookup_id($app_id);
+            $app = BoincApp::lookup_id($appid);
             if (!$app) error_page("no such app");
-            $batches = BoincBatch::enum("app_id = $app_id and state=$state order by id desc");
+            $batches = BoincBatch::enum("app_id = $appid and state=$state order by id desc");
         } else {
             $batches = BoincBatch::enum("state=$state order by id desc");
         }
@@ -578,7 +578,7 @@ case 'retire_batch': handle_retire_batch($user); break;
 case 'retire_batch_confirm': handle_retire_batch_confirm(); break;
 case 'show_all': handle_show_all($user); break;
 default:
-    error_page('no such action');
+    error_page("no such action $action");
 }
 
 ?>

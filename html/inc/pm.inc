@@ -23,7 +23,7 @@ require_once("bbcode_html.inc");
 function pm_header() {
     echo "<div>\n";
     echo "    <a href=\"pm.php?action=inbox\">".tra("Inbox")."</a>\n";
-    echo "    &middot; <a href=\"pm.php?action=new\">".tra("Write")."</a>\n";
+    echo "    | <a href=\"pm.php?action=new\">".tra("Write")."</a>\n";
     echo "</div>\n";
 }
 
@@ -86,7 +86,7 @@ function pm_form($replyto, $userid, $error = null) {
     row2(tra("Message")."<span class=\"smalltext\">".html_info()."</span>",
         $bbcode_html."<textarea name=\"content\" rows=\"18\" cols=\"80\">$content</textarea>"
     );
-    echo "<tr><td></td><td><input type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\"> <input type=\"submit\" value=\"".tra("Send message")."\"></td></tr>\n";
+    echo "<tr><td></td><td><input class=\"btn\" type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\"> <input class=\"btn\" type=\"submit\" value=\"".tra("Send message")."\"></td></tr>\n";
     end_table();
     
     page_tail();
@@ -175,7 +175,7 @@ function pm_notification($user) {
     if ($unread) {
         $output .= "<span class=\"inboxunread\"> ($unread ".tra("unread").")</span>\n";
     }
-    $output .= " &middot; <a href=\"pm.php?action=new\">".tra("Write")."</a>\n";
+    $output .= " | <a href=\"pm.php?action=new\">".tra("Write")."</a>\n";
     return $output;
 }
 

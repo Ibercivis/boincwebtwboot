@@ -1,0 +1,368 @@
+akismet.inc:        $author = urlencode($user->name);
+bolt_cat.inc:        switch ($user->bolt->sex) {
+bolt_cat.inc:        if (!$user->bolt->birth_year) return "Unknown";
+bolt_cat.inc:        $n = $this_year - $user->bolt->birth_year;
+bolt_db.inc:        if (isset($user->bolt)) return;
+bolt_db.inc:        if (isset(self::$cache[$user->id])) {
+bolt_db.inc:            $bolt = self::$cache[$user->id];
+bolt_db.inc:            $bolt = self::lookup_userid($user->id);
+bolt_db.inc:                self::insert("(user_id) values ($user->id)");
+bolt_db.inc:                $bolt = self::lookup_userid($user->id);
+bolt_db.inc:            self::$cache[$user->id] = $bolt;
+bolt_db.inc:        $user->bolt = $bolt;
+bolt.inc:    return $user->bolt->sex;
+bolt.inc:    if (!$user->bolt->birth_year) return -1;
+bolt.inc:    return $this_year - $user->bolt->birth_year;
+bolt.inc:    return $user->country;
+bolt.inc:    return $user->name;
+bolt.inc:    return unserialize($user->bolt->attrs);
+bolt.inc:    $user->bolt->update("attrs='$attrs'");
+bolt_select.inc:        BoltSelectFinished::insert("(user_id, course_id, end_time, name, selected_unit, view_id) values ($user->id, $course->id, $now, '$this->name', '$child_name', $view->id)");
+bolt_util.inc:    if (!$user->bolt->birth_year) return true;
+bolt_util.inc:    if (!$user->bolt->sex) return true;
+bolt_util.inc:        $s = ($i == $user->bolt->birth_year)?"selected":"";
+bolt_util.inc:    $s = (!$user->bolt->birth_year)?"selected":"";
+bolt_util.inc:    $s = ($user->bolt->sex == 0)?"selected":"";
+bolt_util.inc:    $s = ($user->bolt->sex == 1)?"selected":"";
+bolt_util.inc:    $s = ($user->bolt->sex == 2)?"selected":"";
+bolt_util.inc:    $refreshes = BoltRefreshRec::enum("user_id=$user->id and course_id=$course->id");
+bossa_db.inc:        if (isset($user->bossa)) return;
+bossa_db.inc:        if (isset(self::$cache[$user->id])) {
+bossa_db.inc:            $bossa = self::$cache[$user->id];
+bossa_db.inc:            $bossa = self::lookup_userid($user->id);
+bossa_db.inc:                self::insert("(user_id) values ($user->id)");
+bossa_db.inc:                $bossa = self::lookup_userid($user->id);
+bossa_db.inc:            self::$cache[$user->id] = $bossa;
+bossa_db.inc:        $user->bossa = $bossa;
+bossa_db.inc:        $query = "select * from ".$db->db_name.".bossa_job_inst where app_id=$app->id and user_id=$user->id and finish_time=0 limit 1";
+bossa_db.inc:            $query = "select * from ".$db->db_name.".bossa_job where app_id=$app->id and (select count(*) from ".$db->db_name.".bossa_job_inst where job_id=bossa_job.id and user_id=$user->id) = 0 and state=1 and calibration=1 order by priority_0 desc limit 1";
+bossa_db.inc:            if (isset($user->bossa->category)) {
+bossa_db.inc:                $prio = "priority_".$user->bossa->category;
+bossa_db.inc:            $query = "select * from ".$db->db_name.".bossa_job where app_id=$app->id and (select count(*) from ".$db->db_name.".bossa_job_inst where job_id=bossa_job.id and user_id=$user->id) = 0 and state=1 and calibration=0 order by $prio desc limit 1";
+bossa_db.inc:        $clause = "(create_time, app_id, job_id, user_id, batch_id, calibration) values ($now, $app->id, $job->id, $user->id, $job->batch_id, $job->calibration)";
+bossa_example3.inc:        $b = $user->bossa;
+bossa_example3.inc:    $b = $user->bossa;
+db.inc:// apply this to any user-supplied strings used in queries
+db_ops.inc:    return "$h<br><small>(<a href=\"db_action.php?table=user&id=$user->id\">$user->name</a>)</small>";
+db_ops.inc:    row("ID", $user->id);
+db_ops.inc:    row("Created", time_str($user->create_time));
+db_ops.inc:    row("Name", $user->name);
+db_ops.inc:    row("Authenticator", $user->authenticator);
+db_ops.inc:    row("Email address", $user->email_addr);
+db_ops.inc:    row("Country", $user->country);
+db_ops.inc:    row("Postal code", $user->postal_code);
+db_ops.inc:    row("Total credit", $user->total_credit);
+db_ops.inc:    row("Average credit", $user->expavg_credit);
+db_ops.inc:    row("Last average time", time_str($user->expavg_time));
+db_ops.inc:    row("Default venue", $user->venue);
+db_ops.inc:    row("Hosts", "<a href=\"db_action.php?table=host&userid=$user->id&detail=low\">click</a>");
+db_ops.inc:    row("Cross project ID", $user->cross_project_id);
+db_ops.inc:    row("Password Hash", $user->passwd_hash);
+db_ops.inc:    row("Donated", $user->donated);
+db_ops.inc:        $top_country[$user->country] += 1;
+db_ops.inc:    return $user->name;
+email.inc:        $mail->AddAddress($user->email_addr, $user->name);
+email.inc:        return mail($user->email_addr, $subject, $body, $headers);
+email.inc:    $x = md5($user->id.$user->authenticator.$now);
+email.inc:".$master_url."login_action.php?id=$user->id&t=$now&h=$x
+email.inc:    return URL_BASE."opt_out.php?code=".salted_key($user->authenticator)."&userid=$user->id";
+forum_banishment_vote.inc:    if ( vote_is_in_progress($user->id) !=0 ) {
+forum_banishment_vote.inc:    $query="insert into banishment_vote (userid,modid,start_time,end_time) values (".$user->id.",".$logged_in_user->id.",".$now.",".$fin.")";
+forum_banishment_vote.inc:    $query="insert into banishment_votes (voteid,modid,time,yes) values (". $voteid .",". $logged_in_user->id .",". $now .",1)";
+forum_banishment_vote.inc:    $query="update forum_preferences set banished_until=".$fin." where userid=".$user->id;
+forum_banishment_vote.inc:    if (vote_is_in_progress($user->id)<1) {
+forum_banishment_vote.inc:    $query="select id as voteid from banishment_vote where userid=".$user->id." and end_time>".$now;
+forum_banishment_vote.inc:    $query="select count(id) as count from banishment_votes where voteid=".$voteid." and modid=".$logged_in_user->id;
+forum_banishment_vote.inc:    $query="insert into banishment_votes (voteid,modid,time,yes) values (" . $voteid .",". $logged_in_user->id .",". $now .",1)";
+forum_banishment_vote.inc:    if (vote_is_in_progress($user->id)<1) {
+forum_banishment_vote.inc:    $query="select id as voteid from banishment_vote where userid=".$user->id." and end_time>".$now;
+forum_banishment_vote.inc:    $query="select count(id) as count from banishment_votes where voteid=".$voteid ." and modid=".$logged_in_user->id;
+forum_banishment_vote.inc:    $query="insert into banishment_votes (voteid,modid,time,yes) values (" . $voteid .",". $logged_in_user->id .",". $now .",0)";
+forum_db.inc:        if (isset($user->prefs)) return;
+forum_db.inc:        if (!$nocache && isset(self::$cache[$user->id])) {
+forum_db.inc:            $prefs = self::$cache[$user->id];
+forum_db.inc:            $prefs = self::lookup_userid($user->id);
+forum_db.inc:                self::insert("(userid, thread_sorting, pm_notification) values ($user->id, 8, 0)");
+forum_db.inc:                $prefs = self::lookup_userid($user->id);
+forum_db.inc:                $prefs->userid = $user->id;
+forum_db.inc:            self::$cache[$user->id] = $prefs;
+forum_db.inc:        $user->prefs = $prefs;
+forum_email.inc:The following email was sent to $user->name (ID $user->id)
+forum_email.inc:".URL_BASE."forum_user_posts.php?userid=$user->id
+forum_email.inc:    Reporting User: $user->id ($user->name)
+forum_email.inc:    $success = mail_report_list($forum, $user->name." has been banished.", $body);
+forum_email.inc:             .$user->id
+forum_email.inc:             .$user->id
+forum_email.inc:    $success &= mail_report_list($forum, "A banishment vote for ".$user->name." has been started.", $body);
+forum.inc:    if ($thread->timestamp <= $user->prefs->mark_as_read_timestamp) return false;
+forum.inc:    $log = BoincForumLogging::lookup($user->id, $thread->id);
+forum.inc://  Process a user-supplied title to remove HTML stuff
+forum.inc:    if ($logged_in_user && $logged_in_user->prefs->display_wrap_postcount > 0) {
+forum.inc:        $num_to_show = $logged_in_user->prefs->display_wrap_postcount;
+forum.inc:        $forum_log = BoincForumLogging::lookup($logged_in_user->id, $thread->id);
+forum.inc:        } else if ($logged_in_user && $logged_in_user->prefs->jump_to_unread) {
+forum.inc:                $logged_in_user->id, $thread->id, $latest_shown_timestamp
+forum.inc:    return explode("|", $user->prefs->ignorelist);
+forum.inc:    $list = explode("|", $user->prefs->ignorelist);
+forum.inc:        if ($userid == $other_user->id) {
+forum.inc:    $list[] = $other_user->id;
+forum.inc:    return $user->prefs->update("ignorelist='$x'");
+forum.inc:    $list = explode("|", $user->prefs->ignorelist);
+forum.inc:        if ($userid == $other_user->id) {
+forum.inc:    return $user->prefs->update("ignorelist='$x'");
+forum.inc:    $list = explode("|", $user->prefs->ignorelist);
+forum.inc:    return in_array($other_user->id, $list);
+forum.inc:        $tokens = url_tokens($logged_in_user->authenticator);
+forum.inc:        if ($user->id == $logged_in_user->id) {
+forum.inc:        if ($user->prefs && $user->prefs->privilege($keys[$i])) {
+forum.inc:    if ($logged_in_user && $logged_in_user->prefs){
+forum.inc:        $highlight = $logged_in_user->prefs->highlight_special && $is_posted_by_special;
+forum.inc:    if ($user->create_time > time()-ST_NEW_TIME) $fstatus.=ST_NEW."<br>";
+forum.inc:        if ($user->prefs && $user->prefs->avatar!="" && (!$logged_in_user || ($logged_in_user->prefs->hide_avatars==false))) {
+forum.inc:            echo "<img class=authorinfo width=\"".AVATAR_WIDTH."\" height=\"".AVATAR_HEIGHT."\" src=\"".$user->prefs->avatar."\" alt=\"Avatar\"><br>";
+forum.inc:    $url = "pm.php?action=new&amp;userid=".$user->id;
+forum.inc:    $name = $user->name;
+forum.inc:    echo "<br>".tra("Joined: %1", gmdate('j M y', $user->create_time)), "<br>";
+forum.inc:    if (!isset($user->nposts)) {
+forum.inc:        $user->nposts = BoincPost::count("user=$user->id");
+forum.inc:        echo tra("Posts: %1", $user->nposts)."<br>";
+forum.inc:        //echo "ID: ".$user->id."<br>";
+forum.inc:            echo tra("Credit: %1", number_format($user->total_credit)) ."<br>";
+forum.inc:            echo tra("RAC: %1",    number_format($user->expavg_credit))."<br>";
+forum.inc:            if (array_key_exists($user->country, $country_to_iso3166_2)) {
+forum.inc:                $code = $country_to_iso3166_2[$user->country];
+forum.inc:                echo "<img class=flag alt=\"$user->country\" title=\"$user->country\" src=flags/$code.png><br>\n";
+forum.inc:        if ($post->signature && (!$logged_in_user || !$logged_in_user->prefs->hide_signatures)){
+forum.inc:            $posttext.="\n____________\n".$user->prefs->signature;
+forum.inc:    if (isset($user->prefs)) {
+forum.inc:        return ($user->prefs->banished_until > time());
+forum.inc:            tra("You may not post or rate messages until %1", gmdate('M j, Y', $user->prefs->banished_until))
+forum.inc:    if ($user->prefs->pm_notification == 1) {
+forum.inc:    BoincNotify::replace("userid=$user->id, create_time=$now, type=$type, opaque=$thread->id");
+forum.inc:    $id = BoincPost::insert("(thread, user, timestamp, content, parent_post, signature) values ($thread->id, $user->id, $now, '$content', $parent_id, $sig)");
+forum.inc:        if ($user->id == $sub->userid) continue;
+forum.inc:    $user->prefs->update("posts=posts+1");
+forum.inc:    $id  = BoincThread::insert("(forum, owner, title, create_time, timestamp, replies, status) values ($forum->id, $user->id, '$title', $now, $now, -1, $status)");
+forum.inc:    $pp = BoincPost::enum("user=$user->id");
+forum.inc:    $ss = BoincSubscription::enum("userid=$user->id");
+forum.inc:    $p = BoincForumPrefs::lookup_userid($user->id);
+forum.inc:        if ($logged_in_user->prefs->privilege(S_ADMIN) || ($logged_in_user->prefs->privilege(S_MODERATOR) && $moderators_allowed_to_ban)) {
+forum.inc:        if ($logged_in_user->prefs->privilege(S_MODERATOR) && $moderators_vote_to_ban) {
+forum.inc:           (!$user->prefs->privilege(S_SCIENTIST)) &&
+forum.inc:           (!$user->prefs->privilege(S_DEV)) &&
+forum.inc:           (!$user->prefs->privilege(S_ADMIN))
+forum.inc:        if ($user->prefs->privilege(S_MODERATOR)) return;
+forum.inc:        if ($user->teamid != $team->id) {
+forum.inc:    if ($user->total_credit<$forum->post_min_total_credit || $user->expavg_credit<$forum->post_min_expavg_credit) {
+forum.inc:    if (time()-$user->prefs->last_post <$forum->post_min_interval) {
+forum.inc:        if ($user->prefs->privilege(S_MODERATOR)) return true;
+forum.inc:        if ($user->prefs->privilege(S_ADMIN)) return true;
+forum.inc:        if ($user->prefs->privilege(S_DEV)) return true;
+forum.inc:        if ($user->prefs->privilege(S_SCIENTIST)) return true;
+forum.inc:        if ($user->prefs->privilege(S_ADMIN)) return true;
+forum.inc:            if ($user->teamid != $forum->category) return false;
+forum.inc:        $tokens = url_tokens($user->authenticator);
+forum_rss.inc:        $description .= " (posts by $user->name)";
+friend.inc:    return "$src_user->name has requested friendship with you. Please accept or decline.";
+friend.inc:    return "$src_user->name has confirmed you as a friend";
+friend.inc:        <a href=friend.php?action=query&userid=$notify->opaque>Friendship request</a> from <a href=show_user.php?userid=$user->id>$user->name</a>
+friend.inc:        <a href=friend.php?action=accepted&userid=$notify->opaque>Friendship confirmation</a> from $user->name
+friend.inc:$src_user->name has added you as a friend at ".PROJECT.".
+friend.inc:$src_user->name says: $msg
+friend.inc:$dest_user->name has confirmed you as a friend at ".PROJECT.".
+friend.inc:$dest_user->name says: $msg
+friend.inc:    $msg = "$src_user->name has requested friendship with you. Please accept or decline.";
+friend.inc:    $msg = "$src_user->name has confirmed you as a friend";
+host.inc:            $x = " | <a href=host_delete.php?hostid=$host->id".url_tokens($user->authenticator).">".tra("Delete this computer")."</a> ";
+host.inc:            if ($user && $user->show_hosts) {
+host.inc:// remove user-specific info from a user's hosts
+host.inc:    $hosts = BoincHost::enum("userid=$user->id");
+notify.inc:    return md5($user->authenticator.$user->passwd_hash."notify_rss");
+notify.inc:    return URL_BASE."notify_rss.php?userid=$user->id&auth=".notify_rss_auth($user);
+pm.inc:        if (!$message || $message->userid != $g_logged_in_user->id) {
+pm.inc:            $writeto = $userid." (".$user->name.")";
+pm.inc:            $writeto = $userid." (".$user->name.")";
+pm.inc:    echo form_tokens($g_logged_in_user->authenticator);
+pm.inc:From: $logged_in_user->name (ID $logged_in_user->id)
+pm.inc:    return "$from_user->name ".tra("sent you a private message; subject:")." '$pm->subject'";
+pm.inc:    return "<a href=pm.php>".tra("Private message%1 from %2, subject:" , "</a>", $from_user->name )." $pm->subject";
+pm.inc:    $mid = BoincPrivateMessage::insert("(userid, senderid, date, subject, content) VALUES ($to_user->id, $from_user->id, UNIX_TIMESTAMP(), '$sql_subject', '$sql_content')");
+pm.inc:        switch ($to_user->prefs->pm_notification) {
+pm.inc:    BoincNotify::insert("(userid, create_time, type, opaque) values ($to_user->id, ".time().", ".NOTIFY_PM.", $mid)");
+pm.inc:    $unread = BoincPrivateMessage::count("userid=$user->id AND opened=0");
+pm.inc:    if (!$user->prefs->pm_notification) {
+pm.inc:    $mm = BoincPrivateMessage::enum("userid=$user->id or senderid=$user->id");
+prefs.inc:    $tokens = url_tokens($g_logged_in_user->authenticator);
+prefs.inc:    $tokens = url_tokens($g_logged_in_user->authenticator);
+prefs.inc:    $project_prefs = prefs_parse_project($user->project_prefs);
+prefs.inc:        $tokens = url_tokens($user->authenticator);
+prefs.inc:    $global_prefs = prefs_parse_global($user->global_prefs);
+prefs.inc:        $tokens = url_tokens($user->authenticator);
+prefs.inc:        ".form_tokens($user->authenticator);
+prefs.inc:// Example: prefs_form_radio_buttons("allow_beta_work", $user->allow_beta_work);
+prefs.inc:    $venue = $user->venue;
+prefs.inc:    if ($user->venue == '') $n = 'selected';
+prefs.inc:    if ($user->venue == 'home') $h = 'selected';
+prefs.inc:    if ($user->venue == 'work') $w = 'selected';
+prefs.inc:    if ($user->venue == 'school') $s = 'selected';
+prefs.inc:    $user->venue = $_GET['default_venue'];
+prefs.inc:    mysql_query("update user set venue='$user->venue' where id=$user->id");
+prefs.inc:    $query = "update user set global_prefs='$prefs_xml' where id=$user->id";
+prefs.inc:    $user->global_prefs = $prefs_xml;
+prefs.inc:    $send_email = $user->send_email?1:0;
+prefs.inc:    $show_hosts = $user->show_hosts?1:0;
+prefs.inc:    $query = "update user set project_prefs='$prefs_xml', send_email=$send_email, show_hosts=$show_hosts where id=$user->id";
+prefs.inc:    $user->project_prefs = $prefs_xml;
+profile.inc:    if (!$user->has_profile) return null;
+profile.inc:    $profile = BoincProfile::lookup("userid=$user->id");
+profile.inc:    return profile_thumb_url($user->id);
+profile.inc:    delete_user_pictures($user->id);
+profile.inc:    return BoincProfile::delete_aux("userid=$user->id");
+profile.inc:    $summary = "<a href=\"".URL_BASE."view_profile.php?userid=".$profile->userid."\">".$user->name."</a> ".$description;
+profile.inc:    if (!$logged_in_user && $min_credit && $user->expavg_credit < $min_credit ) {
+profile.inc:    $profile = BoincProfile::lookup("userid = $user->id");
+profile.inc:        $user->update("has_profile = 0");
+profile.inc:    $can_edit = $logged_in_user && $user->id == $logged_in_user->id;
+profile.inc:            <img vspace=\"6\" hspace=\"9\" src=\"".profile_image_url($user->id)."\">
+profile.inc:            tra("I %1like%2 this profile", "<a href=\"profile_rate.php?userid=".$user->id."&vote=recommend\">", "</a>")
+profile.inc:            tra("I %1do not like%2 this profile", "<a href=\"profile_rate.php?userid=".$user->id."&vote=reject\">", "</a>")
+sandbox.inc:    $d = "../../sandbox/$user->id";
+sandbox.inc:    $f = "sb_".$user->id."_".$md5;
+sandbox.inc:    // $pbatches = BoincBatch::enum("user_id = $user->id and state != BATCH_STATE_COMPLETE and state != BATCH_STATE_ABORTED");
+sandbox.inc:    $pbatches = BoincBatch::enum("user_id = $user->id and state != 2 and state != 3");
+submit_util.inc:    $auth_str = md5($user->authenticator.$name);
+submit_util.inc:    $auth_str = md5($user->authenticator.$batch_id);
+submit_util.inc:    //echo "url: user authenticator= $user->authenticator, wu_id=$wu_id<br/>";
+submit_util.inc:    $auth_str =  md5($user->authenticator.$wu_id);
+team.inc:    if ($team->ping_user == $user->id) {
+team.inc:        if ($team->userid == $user->id) {
+team.inc:        if ($user->teamid != $team->id) {
+team.inc:                $tokens = url_tokens($user->authenticator);
+team.inc:        if (($user->teamid == $team->id)) {
+team.inc:            if (($user->id == $team->userid)) {
+team.inc:        $user_total_credit = format_credit_large($user->total_credit);
+team.inc:        $user_expavg_credit = format_credit($user->expavg_credit);
+team.inc:        if ($user->id == $team->userid) {
+team.inc:            <td align=center>$user->country</td>
+team.inc:    return $user->id == $team->userid;
+team.inc:    if ($user->id != $team->userid) {
+team.inc:    	if ($user->id == $team->userid) return true;
+team.inc:    	$admin = BoincTeamAdmin::lookup($team->id, $user->id);
+team.inc:        if ($a->userid == $user->id) return true;
+team.inc:    $res = $user->update("teamid=$team->id");
+team.inc:        BoincTeamDelta::insert("(userid, teamid, timestamp, joining, total_credit) values ($user->id, $team->id, $now, 1, $user->total_credit)");
+team.inc:    if (!$user->teamid) return;
+team.inc:    $user->update("teamid=0");
+team.inc:    $team = BoincTeam::lookup_id($user->teamid);
+team.inc:    if ($team && $team->ping_user=$user->id) {
+team.inc:    BoincTeamAdmin::delete("teamid=$user->teamid and userid=$user->id");
+team.inc:    BoincTeamDelta::insert("(userid, teamid, timestamp, joining, total_credit) values ($user->id, $user->teamid, $now, 0, $user->total_credit)");
+text_transform.inc:// Functions that process user-supplied text (e.g. messages)
+text_transform.inc:		if(isset($user->prefs)){
+text_transform.inc:			if ($user->prefs->images_as_links) $options->images_as_links = 1;
+text_transform.inc:			if ($user->prefs->link_popup) $options->link_popup = 1;
+uotd.inc:        return "<a href=\"".URL_BASE."view_profile.php?userid=$user->id\"><img border=0 vspace=4 hspace=8 align=left src=\"".profile_thumb_url($user->id)."\" alt=\"".tra("User profile")."\"></a>";
+uotd.inc:    $sql = "UPDATE profile SET uotd_time = ".time()." WHERE userid=$user->id";
+uotd.inc:    echo "Chose user $user->id as UOTD\n";
+user.inc:    $user->projects = array();
+user.inc:            $user->projects[] = parse_project($f);
+user.inc:    $cpid = md5($user->cross_project_id . $user->email_addr);
+user.inc:    if (count($user->projects) > 1) {
+user.inc:        usort($user->projects, "cmp");
+user.inc:            echo "<h2>".tra("Projects in which %1 is participating", $user->name)."</h2>";
+user.inc:        foreach($user->projects as $project) {
+user.inc:    return BoincPost::count("user=$user->id");
+user.inc:    row2(tra("Total credit"), format_credit_large($user->total_credit));
+user.inc:    row2(tra("Recent average credit"), format_credit($user->expavg_credit));
+user.inc:    row2(tra("Tasks"), "<a href=\"results.php?userid=$user->id\">".tra("View")."</a>");
+user.inc:    $cpid = md5($user->cross_project_id . $user->email_addr);
+user.inc:    if ($user->teamid) {
+user.inc:    row2(tra("Stats on your cell phone"), URL_BASE."userw.php?id=$user->id");
+user.inc:    $x = md5($user->authenticator.$user->passwd_hash);
+user.inc:    return "{$user->id}_$x";
+user.inc:    $email_text = $user->email_addr;
+user.inc:    if (defined("SHOW_NONVALIDATED_EMAIL_ADDR") && !$user->email_validated) {
+user.inc:    row2(tra("Name"), $user->name);
+user.inc:    if (strlen($user->url)) {
+user.inc:        $x = "<a href=http://$user->url>http://$user->url</a>";
+user.inc:    row2(tra("Country"), $user->country);
+user.inc:    row2(tra("Postal code"), $user->postal_code);
+user.inc:    row2(tra("%1 member since", PROJECT), date_str($user->create_time));
+user.inc:    $url_tokens = url_tokens($user->authenticator);
+user.inc:    row2(tra("User ID")."<br/><span class=\"note\">".tra("Used in community functions")."</span>", $user->id);
+user.inc:    if ($user->has_profile) {
+user.inc:        $x = "<a href=\"view_profile.php?userid=$user->id\">".tra("View")."</a> | <a href=\"delete_profile.php\">".tra("Delete")."</a>";
+user.inc:        row2(tra("Message boards"), "<a href=\"".URL_BASE."forum_user_posts.php?userid=$user->id\">".tra("%1 posts", $tot)."</a>");
+user.inc:    $notifies = BoincNotify::enum("userid=$user->id");
+user.inc:        if ($user->teamid) {
+user.inc:            $team = lookup_team($user->teamid);
+user.inc:                $x .= " | <a href=\"team_manage.php?teamid=$user->teamid\">".tra("Administer")."</a>";
+user.inc:            if ($user->id==$team->userid && $team->ping_user >0) {
+user.inc:        $teams_founded = BoincTeam::enum("userid=$user->id");
+user.inc:            if ($team->id != $user->teamid) {
+user.inc:    $friends = BoincFriend::enum("user_src=$user->id and reciprocated=1");
+user.inc:    row2(tra("User ID"), $user->id);
+user.inc:    row2(tra("%1 member since", PROJECT), date_str($user->create_time));
+user.inc:    row2(tra("Country"), $user->country);
+user.inc:    if (strlen($user->url) && $user->expavg_credit > 1) {
+user.inc:        row2(tra("URL"), "<a href=\"http://$user->url\">http://$user->url</a>");
+user.inc:        if ($user->show_hosts) {
+user.inc:            row2(tra("Computers"), "<a href=\"".URL_BASE."hosts_user.php?userid=$user->id\">".tra("View")."</a>");
+user.inc:    if ($user->donated == 1) { 
+user.inc:    $cache_object->team = lookup_team($user->teamid);
+user.inc:    $friends = BoincFriend::enum("user_src=$user->id and reciprocated=1");
+user.inc:        if ($user->teamid && $team) {
+user.inc:        row2(tra("Message boards"), "<a href=\"".URL_BASE."forum_user_posts.php?userid=$user->id\">".tra("%1 posts", $tot)."</a>");
+user.inc:    if ($logged_in_user && $logged_in_user->id != $user->id) {
+user.inc:        row2(tra("Contact"), "<a href=\"pm.php?action=new&userid=".$user->id."\">".tra("Send private message")."</a>");
+user.inc:        $friend = BoincFriend::lookup($logged_in_user->id, $user->id);
+user.inc:                "<a href=\"friend.php?action=cancel_confirm&userid=$user->id\">".tra("Cancel friendship")."</a>"
+user.inc:            row2(tra("Friends"),  "<a href=\"friend.php?action=add&userid=$user->id\">".tra("Request pending")."</a>");
+user.inc:            row2(tra("Friends"),  "<a href=\"friend.php?action=add&userid=$user->id\">".tra("Add as friend")."</a>");
+user.inc:    if ($user->has_profile) {
+user.inc:        row2(tra("Profile"), "<a href=\"view_profile.php?userid=$user->id\">".tra("View")."</a>");
+util.inc:        $url_tokens = url_tokens($user->authenticator);
+util.inc:        echo "<nobr>$user->name | <a href=".$prefix."logout.php?$url_tokens>".tra("log out")."</a></nobr>";
+util.inc:    if ($user->has_profile) {
+util.inc:        $profile = BoincProfile::lookup_fields("has_picture", "userid=$user->id");
+util.inc:            $img_url = profile_thumb_url($user->id);
+util.inc:        $title = tra("View the profile of %1", $user->name);
+util.inc:        $x .= ' <a href="'.URL_BASE.'view_profile.php?userid='.$user->id.'"><img title="'.$title.'" src="'.$img_url.'" alt="'.$alt.'"></a><br>';
+util.inc:    $x .= " <a href=\"".URL_BASE."show_user.php?userid=".$user->id."\">".$user->name."</a>";
+util.inc:    if ($user->donated == 1) {
+util.inc:        return "(banished: ID $user->id)";
+util.inc:    if ($user->has_profile) {
+util.inc:        $x .= ' <a href="'.URL_BASE.'view_profile.php?userid='.$user->id.'"><img title="View the profile of '.$user->name.'" src="'.$img_url.'" alt="Profile"></a>';
+util.inc:    $x .= " <a href=\"".URL_BASE."show_user.php?userid=".$user->id."\">".$user->name."</a>";
+util.inc:    if ($user->donated == 1) {
+util_ops.inc:        echo "logged in as $user->name. <a href=logout.php>Log out</a>";
+util_ops.inc:    if ($user->has_profile) { 
+util_ops.inc:            "<a href=\"".URL_BASE."view_profile.php?userid=$user->id\">View</a>"
+util_ops.inc:    } else if (!in_array($user->id, $admin_user_ids)) {
+util_ops.inc:    if ($user->prefs->privilege(S_ADMIN) || $user->prefs->privilege(S_DEV)) {
+xml.inc:    $cpid = md5($user->cross_project_id.$user->email_addr);
+xml.inc:    <id>$user->id</id>
+xml.inc:    <create_time>$user->create_time</create_time>
+xml.inc:    <name>".htmlspecialchars($user->name)."</name>
+xml.inc:    <country>$user->country</country>
+xml.inc:    <total_credit>$user->total_credit</total_credit>
+xml.inc:    <expavg_credit>$user->expavg_credit</expavg_credit>
+xml.inc:    <expavg_time>$user->expavg_time</expavg_time>
+xml.inc:    <teamid>$user->teamid</teamid>
+xml.inc:    <url>".htmlspecialchars($user->url)."</url>
+xml.inc:    <has_profile>$user->has_profile</has_profile>
+xml.inc:        $hosts = BoincHost::enum("userid=$user->id");
+xml.inc:        echo "   <venue>$user->venue</venue>\n";
+xml.inc:    if ($creditonly && !$user->total_credit) { return; }
+xml.inc:    $cpid = md5($user->cross_project_id.$user->email_addr);
+xml.inc:    <id>$user->id</id>
+xml.inc:    if ($show_email && $user->send_email) {
+xml.inc:        echo "    <email_addr>$user->email_addr</email_addr>
+xml.inc:    echo "    <total_credit>$user->total_credit</total_credit>";
+xml.inc:        echo "    <create_time>$user->create_time</create_time>
+xml.inc:    <name>".htmlspecialchars($user->name)."</name>
+xml.inc:    <country>$user->country</country>
+xml.inc:    <expavg_credit>$user->expavg_credit</expavg_credit>
+xml.inc:    <expavg_time>$user->expavg_time</expavg_time>
+xml.inc:    <url>".htmlspecialchars($user->url)."</url>
+xml.inc:    <has_profile>$user->has_profile</has_profile>

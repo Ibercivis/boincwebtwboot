@@ -100,9 +100,10 @@ if (user_can_create_thread($user, $forum)) {
 echo "</td>
     <td valign=top align=\"right\">
     <input type=\"hidden\" name=\"id\" value=\"$forum->id\">
+		<div class=\"input-append\">
 ";
 echo select_from_array("sort", $forum_sort_styles, $sort_style);
-echo "<input type=\"submit\" value=\"Sort\">
+echo "<input class=\"btn btn-primary\" type=\"submit\" value=\"Sort\"></div>
     </td>
     </tr>
     </table>
@@ -183,7 +184,10 @@ function show_forum($forum, $start, $sort_style, $user) {
                 if ($thread->locked) {
                     show_image(NEW_IMAGE_LOCKED, tra("You haven't read this thread yet, and it's locked"), tra("unread/locked"));
                 } else {
-                    show_image(NEW_IMAGE, tra("You haven't read this thread yet"), tra("unread"));
+                    //show_image(NEW_IMAGE, tra("You haven't read this thread yet"), tra("unread"));
+		   ?>
+		   <i class="icon-comment"></i>
+                  <?
                 }
             }
         } else {

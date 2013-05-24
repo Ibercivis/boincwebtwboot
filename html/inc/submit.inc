@@ -57,8 +57,6 @@ function req_to_xml($req, $op) {
             $x .= "            <mode>$file->mode</mode>\n";
             switch ($file->mode) {
             case "remote":
-                $x .= "             <source>$file->source</source>\n";
-                break;
             case "local":
                 $x .= "             <path>$file->path</path>\n";
                 break;
@@ -67,7 +65,7 @@ function req_to_xml($req, $op) {
             case "semilocal":
                 $x .= "             <url>$file->url</url>\n";
                 break;
-            }
+            <source>$file->source</source>
             $x .= "        </input_file>\n";
         }
         $x .= "    </job>
@@ -103,7 +101,7 @@ function do_http_op($req, $xml, $op) {
     $post = array();
     $post["request"] = $xml;
     $cwd = getcwd();
-    if ($op == "submit_batch") {
+    if ($op == "submit_batch) {
         foreach ($req->jobs as $job) {
             foreach ($job->input_files as $file) {
                 if ($file->mode == "inline") {
@@ -180,7 +178,7 @@ function boinc_query_batches($req) {
     <authenticator>$req->authenticator</authenticator>
 </query_batches>
 ";
-    list($reply, $errmsg) = do_http_op($req, $req_xml, "");
+    list($reply, $errmsg) = do_http_op($req, $req_xml);
     if ($errmsg) return array(null, $errmsg);
     $batches = array();
     foreach ($reply->batch as $batch) {

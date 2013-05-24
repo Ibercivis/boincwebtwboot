@@ -28,6 +28,12 @@ require_once("../inc/time.inc");
 require_once("../inc/stats_sites.inc");
 
 function team_search_form($params) {
+    if(!isset($params->keywords))
+	$params->keywords="";
+    if(!isset($params->type))
+	$params->type="";
+    if(!isset($params->active))
+	$params->active=0;
     echo '<form name="form" action="team_search.php">';
     start_table();
     row2('<b>'.tra('Search criteria (use one or more)').'</b>', '');
@@ -35,14 +41,15 @@ function team_search_form($params) {
         '<input type="text" name="keywords" value="' . htmlspecialchars($params->keywords) . '">');
     row2_init(tra('Country'), '');
     echo '<select name="country"><option value="" selected>---</option>';
-    $country = $params->country;
+    if(isset($params->country))
+    	$country = $params->country;
     if (!$country || $country == 'None') $country = "XXX";
     print_country_select($country);
     echo "</select></td></tr>\n";
     row2(tra('Type of team'), team_type_select($params->type, true));
     $checked = $params->active?"checked":"";
     row2(tra('Show only active teams'), "<input type=checkbox name=active $checked>");
-    row2("", "<input type=submit name=submit value=\"".tra('Search')."\">");
+    row2("", "<input class=\"btn btn-primary\" type=submit name=submit value=\"".tra('Search')."\">");
     end_table();
     echo '</form>';
 }
@@ -72,9 +79,12 @@ function foundership_transfer_link($user, $team) {
 
 function display_team_page($team, $user) {
     global $team_name_sites;
-    page_head("$team->name");
-
-    echo sanitize_html($team->name_html);
+    if(isset($team->name))
+    	page_head("$team->name");
+    else
+	page_head("");
+    if(isset($team->name_html))
+    	echo sanitize_html($team->name_html);
     echo "<p>";
     start_table();
     row1(tra('Team info'));
@@ -154,7 +164,7 @@ function display_team_page($team, $user) {
             if ($first) {
                 $first = false;
             } else {
-                $x .= " &middot; ";
+                $x .= " | ";
             }
             $x .= user_links($a);
         }
@@ -168,7 +178,7 @@ function display_team_page($team, $user) {
             if ($first) {
                 $first = false;
             } else {
-                $x .= " &middot; ";
+                $x .= " | ";
             }
             $x .= user_links($a);
         }
@@ -266,7 +276,7 @@ function display_team_members($team, $offset, $sort_by) {
 
     if ($offset > 0) {
         $new_offset = $offset - $n;
-        echo "<a href=team_members.php?teamid=$team->id&amp;sort_by=$sort_by&amp;offset=$new_offset>".tra('Previous %1', $n)."</a> &middot; ";
+        echo "<a href=team_members.php?teamid=$team->id&amp;sort_by=$sort_by&amp;offset=$new_offset>".tra('Previous %1', $n)."</a> | ";
     }
     if ($j == $offset + $n + 1) {
         $new_offset = $offset + $n;
@@ -297,9 +307,11 @@ function require_founder_login($user, $team) {
 
 function is_team_admin($user, $team) {
     if (!$user) return false;
-    if ($user->id == $team->userid) return true;
-    $admin = BoincTeamAdmin::lookup($team->id, $user->id);
-    if ($admin) return true;
+    if(isset($team->userid))
+    	if ($user->id == $team->userid) return true;
+    if(isset($team->id))
+    	$admin = BoincTeamAdmin::lookup($team->id, $user->id);
+    if (isset($admin)) return true;
     return false;
 }
 
@@ -411,7 +423,7 @@ function team_edit_form($team, $label, $url) {
     if ($team) {
         echo "<input type=hidden name=teamid value=$team->id>\n";
     }
-    if ($team->seti_id) {
+    if (isset($team->seti_id)) {
         echo "<p><span class=error>".tra("WARNING: this is a BOINC-wide team. If you make changes here, they will soon be overwritten. Edit the %1BOINC-wide team%2 instead.", "<a href=http://boinc.berkeley.edu/teams/>", "</a>")
         ."</span>
             <p>
@@ -423,6 +435,25 @@ function team_edit_form($team, $label, $url) {
         <p>
     ';
     start_table();
+    if(!isset($team->name))
+	$team->name=NULL;
+    if(!isset($team->url))
+	$team->url=NULL;
+    if(!isset($team->name_html))
+	$team->name_html=NULL;
+    if(!isset($team->description))
+	$team->description=NULL;
+    if(!isset($team->type))
+	$team->type=NULL;
+    if(!isset($team->joinable))
+	$team->joinable=NULL;
+
+
+
+
+
+
+
     row2(tra('Team name, text version').'
         <br><span class="note">'.tra('Don\'t use HTML tags.').'</span>',
         "<input name=name type=text size=50 value='$team->name'>"

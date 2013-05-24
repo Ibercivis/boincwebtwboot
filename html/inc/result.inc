@@ -349,12 +349,6 @@ function result_table_start($show_wu_link, $show_host_link, $info) {
     }
     if ($show_wu_link) {
         echo "<th>".tra("Work unit")."<br><span class=\"smalltext\">".tra("click for details")."</span></th>\n";
-        if (function_exists('project_result_info_heading')) {
-            $x = project_result_info_heading();
-            if ($x) {
-                echo "<th>$x</th>\n";
-            }
-        }
     }
     if ($show_host_link) {
         echo "<th>".tra("Computer")."</th>\n";
@@ -413,12 +407,6 @@ function show_result_row(
     echo "<td><a href=\"result.php?resultid=$result->id\">$x</a></td>\n";
     if ($show_wu_link) {
         echo "<td><a href=\"workunit.php?wuid=$result->workunitid\">$result->workunitid</a></td>\n";
-        if (function_exists('project_result_info_link')) {
-            $x = project_result_info_link($result);
-            if ($x) {
-                echo "<td>$x</td>\n";
-            }
-        }
     }
     if ($show_host_link) {
         echo "<td>", host_link($result->hostid), "</td>\n";
@@ -683,14 +671,14 @@ function result_navigation($info, $where_clause) {
         }
 	}
 
-    $x .= "<br><center>";
+    $x .= "<br><center><ul class=pager>";
     $show_prev = ($info->offset >= $info->results_per_page);
     $show_next = ($info->number_of_results > $info->results_per_page);
     if ($show_prev) {
         $i2 = clone $info;
         $i2->offset = $info->offset - $info->results_per_page;
         $url = result_page_url($i2);
-        $x .= "<a href=$url>".tra("Previous")." ".$info->results_per_page."</a>";
+        $x .= "<li><a href=$url>".tra("Previous")." ".$info->results_per_page."</a></li>";
     }
     if ($show_prev && $show_next) {
         $x .= "&nbsp;&middot;&nbsp;";
@@ -699,7 +687,7 @@ function result_navigation($info, $where_clause) {
         $i2 = clone $info;
         $i2->offset = $info->offset + $info->results_per_page;
         $url = result_page_url($i2);
-        $x .= "<a href=$url>".tra("Next")." ".$info->results_per_page."</a>";
+        $x .= "<li><a href=$url>".tra("Next")." ".$info->results_per_page."</a></li>";
     }
     $x .= "<br>".tra("State").": ";
     for ($i=0; $i<NSTATES; $i++) {
@@ -742,7 +730,7 @@ function result_navigation($info, $where_clause) {
         }
     }
 
-    $x .= "</center><br>";
+    $x .= "</ul></center><br>";
 	return $x;
 }
 

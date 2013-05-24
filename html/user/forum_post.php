@@ -127,7 +127,7 @@ if (is_news_forum($forum)) {
     row2("", "<input name=export type=checkbox>".tra("Show this item as a Notice in the BOINC Manager")."<br><span class=note>".tra("Do so only for items likely to be of interest to all volunteers.")."</span>");
 }
 row2("", "<input name=\"add_signature\" value=\"add_it\" ".$enable_signature." type=\"checkbox\"> ".tra("Add my signature to this post"));
-row2("", "<input type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\"> <input type=\"submit\" value=\"".tra("OK")."\">");
+row2("", "<input class=\"btn btn-primary\" type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\"> <input class=\"btn btn-success\" type=\"submit\" value=\"".tra("OK")."\">");
 
 
 end_table();

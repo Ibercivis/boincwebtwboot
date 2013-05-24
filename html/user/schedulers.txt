@@ -1,2 +1,2 @@
-<!-- <scheduler>http://alfa.ibercivis.es/ibercivis_cgi/cgi</scheduler> -->
-<link rel="boinc_scheduler" href="http://alfa.ibercivis.es/ibercivis_cgi/cgi">
+<!-- <scheduler>http://lxbifi21.bifi.unizar.es/tah_cgi/cgi</scheduler> -->
+<link rel="boinc_scheduler" href="http://lxbifi21.bifi.unizar.es/tah_cgi/cgi">

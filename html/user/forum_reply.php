@@ -162,8 +162,8 @@ function show_message_row($thread, $parent_post) {
         $enable_signature="";
     }
     $x2 .= "</textarea><p>
-        <input type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\">
-        <input type=\"submit\" value=\"".tra("Post reply")."\">
+        <input class=\"btn btn-primary\" type=\"submit\" name=\"preview\" value=\"".tra("Preview")."\">
+        <input class=\"btn btn-success\" type=\"submit\" value=\"".tra("Post reply")."\">
         &nbsp;&nbsp;&nbsp;
         <input type=\"checkbox\" name=\"add_signature\" id=\"add_signature\" value=\"add_it\" ".$enable_signature.">
         <label for=\"add_signature\">".tra("Add my signature to this reply")."</label>

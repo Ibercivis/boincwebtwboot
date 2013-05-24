@@ -93,12 +93,14 @@ function output_transform($text, $options = NULL) {
 }
 
 function get_output_options($user) {
-    $options = new output_options();
-    if ($user) {
-        if ($user->prefs->images_as_links) $options->images_as_links = 1;
-        if ($user->prefs->link_popup) $options->link_popup = 1;
-    }
-    return $options;
+	$options = new output_options();
+	if ($user) {
+		if(isset($user->prefs)){
+			if ($user->prefs->images_as_links) $options->images_as_links = 1;
+			if ($user->prefs->link_popup) $options->link_popup = 1;
+		}
+	}
+	return $options;
 }
 
 // Converts bbcode to proper HTML

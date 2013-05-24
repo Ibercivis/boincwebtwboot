@@ -67,12 +67,11 @@ function search_form() {
     row2(tra("Decreasing sign-up time"), "<input type=radio name=search_type value=\"date\" checked>");
     row2(tra("Decreasing average credit"), "<input type=radio name=search_type value=\"rac\">");
     row2(tra("Decreasing total credit"), "<input type=radio name=search_type value=\"total\">");
-    row2("", "<input type=submit name=action value=".tra("Search").">");
+    row2("", "<input type=submit name=action class=\"btn btn-primary\" value=".tra("Search").">");
     end_table();
     echo "
         <script>document.f.search_string.focus()</script>
     ";
-            
     page_tail();
 }
 

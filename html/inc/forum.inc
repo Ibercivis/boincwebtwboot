@@ -121,8 +121,11 @@ function show_forum_header($user) {
         <input type=\"hidden\" name=\"search_max_time\" value=\"30\">
         <input type=\"hidden\" name=\"search_forum\" value=\"-1\">
         <input type=\"hidden\" name=\"search_sort\" value=\"5\">
-        <input type=\"text\" name=\"search_keywords\">
-        <input class=\"btn\" title=\"".tra("Search for words in forum messages")."\" type=\"submit\" value=\"".tra("Search forums")."\"><br>
+				<div class=\"input-append\">
+        	<input type=\"text\" name=\"search_keywords\">
+        	<input class=\"btn btn-primary\" title=\"".tra("Search for words in forum messages")."\" type=\"submit\" value=\"".tra("Search forums")."\"><br>
+				</div>
+				<br />
         <span class=\"smalltext\"><a href=\"forum_search.php\">".tra("Advanced search")."</a></span>
         </td>
     ";
@@ -201,7 +204,7 @@ function start_forum_table($headings, $extra=null) {
     $span = null;
     
     start_table($extra." width=\"100%\"");
-    echo "<tr>";
+    echo "<tr class=\"info\">";
 
     for ($i=0; $i<count($headings); $i++) {
         if (is_array($headings[$i])){
@@ -616,7 +619,11 @@ function show_post(
     }
 
     if ($logged_in_user && $post->timestamp>$latest_viewed){
-        show_image(NEW_IMAGE, tra("You haven't read this message yet"), tra("Unread"), NEW_IMAGE_HEIGHT);
+        //show_image(NEW_IMAGE, tra("You haven't read this message yet"), tra("Unread"), NEW_IMAGE_HEIGHT);
+						?>
+						<i class="icon-comment"></i>
+						<?
+
     }
 
     echo " <a href=\"forum_thread.php?id=".$thread->id."&amp;postid=$post->id\">".tra("Message %1", $post->id)."</a> - ";
@@ -627,7 +634,7 @@ function show_post(
         echo tra(" - in response to ")."<a href=\"forum_thread.php?id=".$thread->id."&amp;postid=".$post->parent_post."\">".tra("Message %1", $post->parent_post)."</a>.";
     }
     if ($can_edit && $controls != NO_CONTROLS) {
-        show_button("forum_edit.php?id=".$post->id."$tokens", tra("Edit"), tra("Edit this message"));
+        show_button("forum_edit.php?id=".$post->id."$tokens", tra("Edit"), tra("Edit this message"),"btn btn");
     }
     if (is_moderator($logged_in_user, $forum)) {
         show_post_moderation_links($config, $logged_in_user, $post, $forum, $tokens);
@@ -661,35 +668,45 @@ function show_post(
         $posttext = output_transform($posttext, $options);
         
         echo "<p>", $posttext, "</p>";
-        echo "</td></tr><tr><td class=\"postfooter\">ID: <i>", $post->id;
+        echo "</td></tr><tr><td class=\"postfooter\">ID: ", $post->id;
         if ($no_forum_rating) {
-            echo " &middot; <a href=\"forum_report_post.php?post=".$post->id."\">";
+            echo " | <a href=\"forum_report_post.php?post=".$post->id."\">";
             show_image(REPORT_POST_IMAGE, tra("Report this post as offensive"), tra("Report as offensive"), REPORT_POST_IMAGE_HEIGHT);
             echo "</a>";
         } else {
             $rating = $post->rating();
-            echo " &middot; ".tra("Rating: %1", $rating)."</i> &middot; ".tra("rate: ")."
+            echo " | ".tra("Rating: %1", $rating)." | ".tra("rate: ")."
                 <a href=\"forum_rate.php?post=".$post->id."&amp;choice=p$tokens\">
             ";
-            show_image(RATE_POSITIVE_IMAGE, tra("Click if you like this message"), tra("Rate +"), RATE_POSITIVE_IMAGE_HEIGHT);
+            //show_image(RATE_POSITIVE_IMAGE, tra("Click if you like this message"), tra("Rate +"), RATE_POSITIVE_IMAGE_HEIGHT);
+						?>
+						<i class="icon-thumbs-up"></i>
+						<?
             echo "</a> / <a href=\"forum_rate.php?post=".$post->id."&amp;choice=n$tokens\">";
-            show_image(RATE_NEGATIVE_IMAGE, tra("Click if you don't like this message"), tra("Rate -"), RATE_NEGATIVE_IMAGE_HEIGHT);
+						?>
+						<i class="icon-thumbs-down"></i>
+						<?
+            //show_image(RATE_NEGATIVE_IMAGE, tra("Click if you don't like this message"), tra("Rate -"), RATE_NEGATIVE_IMAGE_HEIGHT);
             echo "</a> <a href=\"forum_report_post.php?post=".$post->id."\">";
-            show_image(REPORT_POST_IMAGE, tra("Report this post as offensive"), tra("Report as offensive"), REPORT_POST_IMAGE_HEIGHT);
+            //show_image(REPORT_POST_IMAGE, tra("Report this post as offensive"), tra("Report as offensive"), REPORT_POST_IMAGE_HEIGHT);
+						?>
+						<i class="icon-warning-sign"></i>
+						<?
             echo "</a>";
         }
         if (($controls == FORUM_CONTROLS) && (can_reply($thread, $forum, $logged_in_user))) {
-            echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+            echo "&nbsp;&nbsp;&nbsp;&nbsp;<div class=\"btn-group\">";
             $url = "forum_reply.php?thread=" . $thread->id . "&amp;post=" . $post->id . "&amp;no_quote=1#input";
             show_button($url, tra("Reply"), tra("Post a reply to this message"));
             $url = "forum_reply.php?thread=" . $thread->id . "&amp;post=" . $post->id . "#input";
             show_button($url, tra("Quote"), tra("Post a reply by quoting this message"));
+						echo "</div>";
         }
         echo "</td></tr>";
     } else {
         echo "</td></tr><tr><td class=\"postfooter\">";
     }
-    echo "<tr class=\"postseparator\"><td colspan=2></td></tr>";
+    //echo "<tr class=\"postseparator\"><td colspan=2></td></tr>";
 }
 
 // Show a post and its context (e.g. for search results, user posts)
@@ -1053,17 +1070,17 @@ function show_post_moderation_links(
     if ($post->hidden) {
         show_button("forum_moderate_post_action.php?action=unhide&amp;id=".$post->id."$tokens", tra("Unhide"), tra("Unhide this post"));
     } else {
-        show_button("forum_moderate_post.php?action=hide&amp;id=".$post->id."$tokens", tra("Hide"), tra("Hide this post"));
+        show_button("forum_moderate_post.php?action=hide&amp;id=".$post->id."$tokens", tra("Hide"), tra("Hide this post"), "btn");
     }
 
     show_button(
         "forum_moderate_post.php?action=move&amp;id=".$post->id."$tokens",
-        tra("Move"), tra("Move post to a different thread")
+        tra("Move"), tra("Move post to a different thread","btn")
     );
 
     if ($forum->parent_type == 0) {
         if ($logged_in_user->prefs->privilege(S_ADMIN) || ($logged_in_user->prefs->privilege(S_MODERATOR) && $moderators_allowed_to_ban)) {
-            show_button("forum_moderate_post.php?action=banish_user&amp;id=".$post->id."&amp;userid=".$post->user."$tokens", tra("Banish author"));
+            show_button("forum_moderate_post.php?action=banish_user&amp;id=".$post->id."&amp;userid=".$post->user."$tokens", tra("Banish author"),"btn");
         }
         if ($logged_in_user->prefs->privilege(S_MODERATOR) && $moderators_vote_to_ban) {
             require_once("../inc/forum_banishment_vote.inc");

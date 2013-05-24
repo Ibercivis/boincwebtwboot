@@ -35,7 +35,7 @@ row2(tra("Name %1 real name or nickname%2", "<br><span class=note>", "</span>"),
     "<input name=user_name type=text size=30 value='$user->name'>"
 );
 row2(tra("URL %1 of your web page; optional%2", "<br><span class=note>", "</span>"),
-    "http://<input name=url type=text size=50 value='$user->url'>"
+    "<input name=url type=text size=50 value='$user->url'>"
 );
 row2_init(tra("Country"),
     "<select name=country>"
@@ -46,7 +46,7 @@ row2(tra("Postal (ZIP) code %1 Optional%2", "<br><span class=note>", "</span>"),
     "<input name=postal_code type=text size=20 value='$user->postal_code'>"
 );
 
-row2("", "<input type=submit value='".tra("Update info")."'>");
+row2("", "<input type=submit class=\"btn btn-primary\" value='".tra("Update info")."'>");
 end_table();
 echo "</form>\n";
 page_tail();

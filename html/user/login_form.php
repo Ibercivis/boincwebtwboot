@@ -59,7 +59,7 @@ row2(tra("Stay logged in"),
 );
 $x = urlencode($next_url);
 row2("",
-    "<input type=\"submit\" name=\"mode\" value=\"".tra("Log in")."\" tabindex=\"3\"><br><br>".
+    "<input class=\"btn btn-primary\" type=\"submit\" name=\"mode\" value=\"".tra("Log in")."\" tabindex=\"3\"><br><br>".
     tra("or %1create an account%2.", "<a href=\"create_account_form.php?next_url=$x\">","</a>")
 );
 if ($user) {

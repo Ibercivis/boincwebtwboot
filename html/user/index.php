@@ -127,27 +127,11 @@ function show_nav() {
 $stopped = web_stopped();
 $rssname = PROJECT . " RSS 2.0" ;
 $rsslink = URL_BASE . "rss_main.php";
+page_head(PROJECT);
 
-header("Content-type: text/html; charset=utf-8");
-
-echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
-
-echo "<html>
-    <head>
-    <title>".PROJECT."</title>
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\" media=\"all\" />
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"".STYLESHEET."\">
-    <link rel=\"alternate\" type=\"application/rss+xml\" title=\"".$rssname."\" href=\"".$rsslink."\">
-";
-include 'schedulers.txt';
-echo "
-    </head><body>
-    <div class=page_title>".PROJECT."</div>
-";
 
 if (!$stopped) {
     get_logged_in_user(false);
-    show_login_info();
 }
 
 echo "
@@ -194,8 +178,10 @@ show_news(0, 5);
 echo "
     </td>
     </tr></table>
+		<br />
+		<br />
 ";
 
-page_tail_main();
+page_tail();
 
 ?>

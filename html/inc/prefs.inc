@@ -371,9 +371,9 @@ $privacy_pref_descs = array (
     ),
 );
 
-define("DISK_LIMIT_DESC", tra("Disk and memory usage"));
-define("CPU_LIMIT_DESC", tra("Processor usage"));
-define("NETWORK_LIMIT_DESC", tra("Network usage"));
+define("DISK_LIMIT_DESC", "<b>".tra("Disk and memory usage"."</b>"));
+define("CPU_LIMIT_DESC", "<b>".tra("Processor usage")."</b>");
+define("NETWORK_LIMIT_DESC", "<b>".tra("Network usage"."</b>"));
 
 // These texts are used in multiple places in prefs_edit.php and add_venue.php
 define("PREFS_FORM_DESC1", tra("These preferences apply to all the BOINC projects in which you participate.")."<br><br>");
@@ -950,7 +950,7 @@ function print_prefs_form(
         prefs_form_project_specific($prefs->project_specific, $project_error);
     }
 
-    row2("", "<input type=submit value=\"$submit_value\" name=\"action\">");
+    row2("", "<input class=\"btn btn-primary\" type=submit value=\"$submit_value\" name=\"action\">");
     end_table();
     echo "</form>\n";
 }

@@ -73,12 +73,18 @@ echo "</ul></td></tr>";
 row1(tra("Search profile text"));
 rowify("
     <form action=\"profile_search_action.php\" method=\"GET\">
-    <input type=\"text\" name=\"search_string\">
-    <input type=\"submit\" value=\"".tra("Search")."\">
+		<div class=\"input-append\">
+    	<input type=\"text\" name=\"search_string\">
+    	<input class=\"btn btn-primary\" type=\"submit\" value=\"".tra("Search")."\">
+		</div>
     </form>
 ");
 end_table();
 
+?>
+</div>
+</div>
+<?php
 page_tail();
 
 function select_profile($cmd) {

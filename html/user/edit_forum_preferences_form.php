@@ -81,7 +81,7 @@ row2(tra("Avatar")."
     <input type=\"radio\" id=\"avatar_select_1\" name=\"avatar_select\" value=\"1\" ".$select_1.">
         <label for=\"avatar_select_1\">".tra("Use a Globally Recognized Avatar provided by %1", "<a href=\"http://gravatar.com\">Gravatar.com</a>")."</label><br>
     <input type=\"radio\" id=\"avatar_select_2\" name=\"avatar_select\" value=\"2\" ".$select_2.">
-        <label for=\"avatar_select_2\">".tra("Use this uploaded avatar:")."</label> <input type=\"file\" name=\"picture\">"
+        <label for=\"avatar_select_2\">".tra("Use this uploaded avatar:")."</label> <input  type=\"file\" name=\"picture\">"
 );
 if (strlen($user->prefs->avatar)){
     row2(tra("Avatar preview")."<br><span class=\"note\">".tra("This is how your avatar will look")."</span>",
@@ -157,7 +157,7 @@ for ($i=0; $i<sizeof($filtered_userlist); $i++){
             echo "Missing user $id";
             continue;
         }
-        $forum_filtered_userlist .= "<input type =\"submit\" name=\"remove".$filtered_user->id."\" value=\"".tra("Remove")."\"> ".$filtered_user->id." - ".user_links($filtered_user)."<br>";
+        $forum_filtered_userlist .= "<input class=\"btn btn-primary\" type =\"submit\" name=\"remove".$filtered_user->id."\" value=\"".tra("Remove")."\"> ".$filtered_user->id." - ".user_links($filtered_user)."<br>";
     }
 }
 
@@ -165,16 +165,16 @@ row2(tra("Filtered users").
     "<br><span class=note>".tra("Ignore message board posts and private messages from these users.")."</span>",
     "$forum_filtered_userlist
         <input type=\"text\" name=\"forum_filter_user\" size=12> ".tra("User ID (For instance: 123456789)")."
-        <br><input type=\"submit\" name=\"add_user_to_filter\" value=\"".tra("Add user to filter")."\">
+        <br><input class=\"btn btn-primary\" type=\"submit\" name=\"add_user_to_filter\" value=\"".tra("Add user to filter")."\">
     "
 );
 
 row1(tra("Update"));
-row2(tra("Click here to update preferences"), "<input type=submit value=\"".tra("Update")."\">");
+row2(tra("Click here to update preferences"), "<input class=\"btn btn-primary\" type=submit value=\"".tra("Update")."\">");
 echo "</form>\n";
 row1(tra("Reset"));
 row2(tra("Or click here to reset preferences to the defaults"),
-    "<form method=\"post\" action=\"edit_forum_preferences_action.php\"><input type=\"submit\" value=\"".tra("Reset")."\"><input type=\"hidden\" name=\"action\" value=\"reset_confirm\"></form>"
+    "<form method=\"post\" action=\"edit_forum_preferences_action.php\"><input class=\"btn btn-primary\" type=\"submit\" value=\"".tra("Reset")."\"><input type=\"hidden\" name=\"action\" value=\"reset_confirm\"></form>"
 );
 end_table();
 page_tail();

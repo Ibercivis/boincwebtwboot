@@ -36,7 +36,6 @@ if (defined('SECURE_URL_BASE')
 }
 
 page_head(tra("Create an account"), null, null, null, IE_COMPAT_MODE);
-
 $config = get_config();
 if (parse_bool($config, "disable_account_creation")) {
     echo "
@@ -124,7 +123,7 @@ if ($publickey) {
 }
 
 row2("",
-    "<input type=\"submit\" value=\"".tra("Create account")."\">"
+    "<input type=\"submit\" class=\"btn btn-primary\"value=\"".tra("Create account")."\">"
 );
 end_table();
 echo "
